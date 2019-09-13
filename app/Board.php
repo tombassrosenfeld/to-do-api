@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Board extends Model
 {
-    public function jobLists()
+    public function taskLists()
     {
-        return $this->hasMany(JobList::class);
+        return $this->hasMany(TaskList::class);
     }
 }
