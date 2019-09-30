@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class TaskList extends Model
 {
+    protected $fillable = [ "title", "description", "board_id"];
+
     public function board()
     {
         return $this->belongsTo(Board::class);

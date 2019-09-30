@@ -17,3 +17,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::prefix("boards")->group(function() {
+    Route::post("", "Boards@store");
+    Route::get("", "Boards@index");
+
+});
+
+Route::prefix("lists")->group(function() {
+    Route::post("", "TaskLists@store");
+    Route::get("", "TaskLists@index");
+
+});
+
+Route::prefix("tasks")->group(function() {
+    Route::post("", "Tasks@store");
+    Route::get("", "Tasks@index");
+
+});
