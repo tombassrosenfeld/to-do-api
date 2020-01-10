@@ -14,8 +14,6 @@ class Tasks extends Controller
      */
     public function index()
     {
-
-
         return Task::all();
     }
 
@@ -38,9 +36,9 @@ class Tasks extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Task $task)
     {
-        //
+        return $task;
     }
 
     /**
@@ -50,9 +48,11 @@ class Tasks extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Task $task  )
     {
-        //
+        $data = $request->all();
+        $task->fill($data)->save();
+        return $task;
     }
 
     /**
@@ -61,8 +61,9 @@ class Tasks extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Task $task)
     {
-        //
+        $task->delete();
+        return response(null, 204);
     }
 }

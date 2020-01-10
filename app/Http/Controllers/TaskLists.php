@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\TaskList;
 
+use App\Http\Resources\TaskListResource;
+use App\Http\Resources\TaskListIndexResource;
+
 class TaskLists extends Controller
 {
     /**
@@ -14,7 +17,7 @@ class TaskLists extends Controller
      */
     public function index()
     {
-        return TaskList::all();
+        return TaskListResource::collection(TaskList::all());
     }
 
     /**
@@ -36,9 +39,9 @@ class TaskLists extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(TaskList $list)
     {
-        //
+        return $list;
     }
 
     /**
@@ -48,9 +51,11 @@ class TaskLists extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, TaskList $list)
     {
-        //
+        $data = $request->all();
+        $list->fill($data)->save();
+        return $list;
     }
 
     /**
@@ -59,8 +64,9 @@ class TaskLists extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(TaskList $list)
     {
-        //
+        $list->delete();
+        return response(null, 204);
     }
 }

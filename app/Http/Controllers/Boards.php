@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Board;
+use App\Http\Resources\BoardResource;
+use App\Http\Resources\BoardIndexResource;
+
+
 
 class Boards extends Controller
 {
@@ -14,7 +18,7 @@ class Boards extends Controller
      */
     public function index()
     {
-        return Board::all();
+        return BoardIndexResource::collection(Board::all());
     }
 
     /**
@@ -36,9 +40,9 @@ class Boards extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Board $board)
     {
-        //
+        return new BoardResource($board);
     }
 
     /**
@@ -48,9 +52,11 @@ class Boards extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Board $board)
     {
-        //
+        $data = $request->all();
+        $board->fill($data)->save();
+        return $board;
     }
 
     /**
@@ -59,8 +65,9 @@ class Boards extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Board $board)
     {
-        //
+        $board->delete();
+        return response(null, 204);
     }
 }
