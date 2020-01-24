@@ -14,11 +14,14 @@ class TaskListResource extends JsonResource
      */
     public function toArray($request)
     {
+        $orderedTasks = $this->tasks->sortBy('order')->pluck('id');
         return [
             "id" => $this->id,
             "title" => $this->title,
             "description" => $this->description,
-            "tasks" => TaskResource::collection($this->tasks)
+            "order" => $this->order,
+            "tasks" => TaskResource::collection($this->tasks),
+            "tasks_order" => $orderedTasks,
         ];
     }
 }
