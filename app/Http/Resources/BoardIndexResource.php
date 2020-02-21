@@ -19,7 +19,7 @@ class BoardIndexResource extends JsonResource
             "id" => $this->id,
             "title" => $this->title,
             "order" => $this->order,
-            "lists_order" => [],
+            "lists_order" => $orderedTaskLists,
         ];
     }
 }
