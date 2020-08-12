@@ -26,8 +26,9 @@ class Tasks extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-
-        return Task::create($data);
+        Task::create($data);
+        return $this;
+        
     }
 
     /**
