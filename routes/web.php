@@ -12,5 +12,18 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('boards');
+});
+
+Route::get('/boards/', function () {
+    return view('boards');
+});
+
+Route::get('/tasks/create', function() { 
+    return view('form-page');
+});
+Route::post('/tasks/create', "Tasks@webCreateTask");
+
+Route::group(["prefix" => "tasks"], function() {
+    Route::get('{task}', "Tasks@webShow");
 });

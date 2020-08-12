@@ -11,4 +11,11 @@ class Board extends Model
     {
         return $this->hasMany(TaskList::class);
     }
+
+    public function numberOfTasks()
+    {
+        return $this->TaskLists->flatMap( function($list) {
+            return $list->Tasks->all();
+        })->count();
+    }
 }
