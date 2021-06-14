@@ -23,14 +23,14 @@
             <label for="description">Task Description</label>
 
             @error('description')
-             <p>{{ $message }} </p>
+                <p>{{ $message }} </p>
             @enderror
             
             <input value="{{ old("order") }}" name="order" type="number" id="order">
             <label for="order">Order</label>
             @error('order')
-            <p>{{ $message }} </p>
-           @enderror
+                <p>{{ $message }} </p>
+            @enderror
             
             <input value="Create Task" type="submit">
 
