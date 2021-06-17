@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TaskList extends Model
 {
-    protected $fillable = [ "title", "description", "board_id"];
+    protected $fillable = [ "title", "description", "board_id", "order", "temp_id"];
 
     public function board()
     {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Task;
+use App\http\requests\TaskRequest;
 
 class Tasks extends Controller
 {
@@ -26,8 +27,9 @@ class Tasks extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-
-        return Task::create($data);
+        Task::create($data);
+        return $this;
+        
     }
 
     /**
@@ -66,4 +68,19 @@ class Tasks extends Controller
         $task->delete();
         return response(null, 204);
     }
+
+    public function webShow(Task $task)
+    {
+        return view("task", [ "task" => $task ]);
+    }
+
+    public function webCreateTask(TaskRequest $request)
+    {
+        $data = $request->all();
+
+        $task = Task::create($data);
+
+        return redirect("/tasks/{$task->id}");
+    }
+
 }

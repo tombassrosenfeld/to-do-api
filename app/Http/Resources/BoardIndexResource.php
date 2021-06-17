@@ -14,9 +14,12 @@ class BoardIndexResource extends JsonResource
      */
     public function toArray($request)
     {
+        $orderedTaskLists = $this->taskLists->sortBy('order')->pluck('id');
         return [
             "id" => $this->id,
             "title" => $this->title,
+            "order" => $this->order,
+            "lists_order" => $orderedTaskLists,
         ];
     }
 }
