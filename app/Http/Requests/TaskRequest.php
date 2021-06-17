@@ -28,7 +28,6 @@ class TaskRequest extends FormRequest
             "description" => ["required", "string"],
             "task_list_id" => ["required", "integer"],
             "order" => ["required", "integer"], 
-            "temp_id" => ["nullable", "integer"]
         ];
     }
 }
